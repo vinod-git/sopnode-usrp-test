@@ -18,3 +18,41 @@ This test uses the test pod described by [usrp-test.yaml](https://github.com/vin
 route add -net 192.168.100.44 netmask 255.255.255.255 metric 1024 dev net1
 route add -net 192.168.100.43 netmask 255.255.255.255 metric 1024 dev net1
 ```
+Following is the ettus defined streaming test for N300.
+```bash
+<test executable path>/benchmark_rate --args "type=n3xx,mgmt_addr=192.168.100.43,addr=192.168.100.44,master_clock_rate=125e6" --duration 60 --channels "0" --rx_rate 3.84e6  --rx_subdev "A:0" --tx_rate 3.84e6  --tx_subdev "A:0
+```
+This is a test with example inputs provided by Ettus. Note that this test can only be run with server hosting kubernetes test pod and N300 device are on the same network i.e. p4 network. The output for the above mentioned test is as follows,
+
+```bash
+Using Device: Single USRP:
+  Device: N300-Series Device
+  Mboard 0: n300
+  RX Channel: 0
+    RX DSP: 0
+    RX Dboard: A
+    RX Subdev: Magnesium
+  TX Channel: 0
+    TX DSP: 0
+    TX Dboard: A
+    TX Subdev: Magnesium
+
+[00:00:02.982997935] Setting device timestamp to 0...
+Setting TX spp to 365
+[00:00:02.987762818] Testing receive rate 3.840000 Msps on 1 channels
+[00:00:02.990513855] Testing transmit rate 3.840000 Msps on 1 channels
+[00:01:03.258641779] Benchmark complete.
+
+
+Benchmark rate summary:
+  Num received samples:     231352797
+  Num dropped samples:      0
+  Num overruns detected:    0
+  Num transmitted samples:  231406350
+  Num sequence errors (Tx): 0
+  Num sequence errors (Rx): 0
+  Num underruns detected:   0
+  Num late commands:        0
+  Num timeouts (Tx):        0
+  Num timeouts (Rx):        0
+```

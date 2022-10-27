@@ -5,14 +5,14 @@ The sopnode consists of various baseband and RF band devices. These devices are 
                                    
                                                Fig: USRP Test Setup
 
-The fig. USRP Test setup depicts the typical testsetup to perform required performance measurements over the P4 network using sopnode-w2 server and USRP N300 HW device. The testsetup assumes that p4 network is operational and kubernets sopnode cluster is deployed with necessary test specific network attachements. The [usrp-test.yaml](https://github.com/vinod-git/sopnode-usrp-test) shows the example yaml description for creating a test pod. The test pod uses the docker image that is pre-loaded with necessary softwares required to perform a sample test e.g. Ettus UHD or tcpdump. 
+The fig. USRP Test setup depicts the typical testsetup to perform required performance measurements over the P4 network using sopnode-w2 server and USRP N300 HW device. The testsetup assumes that p4 network is operational and kubernets sopnode cluster is deployed with necessary test specific network attachements. The [usrp-test.yaml](https://github.com/vinod-git/sopnode-usrp-test/usrp-test.yaml) shows the example yaml description for creating a test pod. The test pod uses the docker image that is pre-loaded with necessary softwares required to perform a sample test e.g. Ettus UHD or tcpdump. 
 
 # Tests
 Following is the description of tests performed,
 
 
 ## N300 test
-This test uses the test pod described by [usrp-test.yaml](https://github.com/vinod-git/sopnode-usrp-test) file. The test pod uses the docker image that is pre-loaded with necessary softwares required to perform a sample test for N300 USRP. It also uses the macvlan network attachment that is used by gNB pod to connect to N300 USRP. The ettus provided streaming test is used to benchmark N300 over this setup. As the Ettus streaming tests uses the ssh connection to perform test, following network modifications are needed to carry this test over P4 network connected network interfcace. 
+This test uses the test pod described by [usrp-test.yaml](https://github.com/vinod-git/sopnode-usrp-test/usrp-test.yaml) file. The test pod uses the docker image that is pre-loaded with necessary softwares required to perform a sample test for N300 USRP. It also uses the macvlan network attachment that is used by gNB pod to connect to N300 USRP. The ettus provided streaming test is used to benchmark N300 over this setup. As the Ettus streaming tests uses the ssh connection to perform test, following network modifications are needed to carry this test over P4 network connected network interfcace. 
 
 ```bash
 route add -net 192.168.100.44 netmask 255.255.255.255 metric 1024 dev net1
